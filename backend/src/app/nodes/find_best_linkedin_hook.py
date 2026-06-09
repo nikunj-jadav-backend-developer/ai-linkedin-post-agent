@@ -1,5 +1,5 @@
-from src.app.schemas.state import LinkedInState
-from src.app.schemas.schema import HooksResponse
+from app.schemas.state import LinkedInState
+from app.schemas.schema import HooksResponse
 from langchain_core.output_parsers import PydanticOutputParser
 
 

@@ -1,11 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
-from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
-from src.app.monitoring.metrics import REQUEST_COUNT
-from src.app.monitoring.middleware import PrometheusMiddleware
-from src.app.routes.post_routes import router as post_router
-from src.app.routes.auth_routes import router as auth_router
+# Removing old import hook
 
 app = FastAPI(
     title="LinkedIn Content Automation API",
@@ -26,26 +21,44 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from src.app.routes.post_routes import router as post_router
+from src.app.routes.auth_routes import router as auth_router
 
-app.add_middleware(PrometheusMiddleware)
-
-
+# Include single unified router
 app.include_router(post_router)
 app.include_router(auth_router)
 
-@app.get("/metrics",tags=["Monitoring"],include_in_schema=True)
-def metrics():
-    return Response(
-        generate_latest(),
-        media_type=CONTENT_TYPE_LATEST
-    )
+# def main():
 
-@app.get("/test")
-def test():
+#     graph = app_graph()
 
-    REQUEST_COUNT.labels(
-        "GET",
-        "/test"
-    ).inc()
+#     result = graph.invoke({
+#         "topic": "Why Human-in-the-Loop is Important in AI Systems"
+#     })
 
-    return {"status": "ok"}
+#     linkedin_content = result.get("linkedin_post", "")
+#     score = result.get("score", 0)
+#     status = result.get("status", "failed")
+
+#     print("*" * 50, f"LinkedIn Post with score : {score} Start", "*" * 50)
+
+#     print("LinkedIn Post:\n", linkedin_content, "\n\n")
+
+#     print("*" * 50, "LinkedIn Post End", "*" * 50)
+
+#     if status == "success":
+#         print(f"\n✅ {result.get('message')}")
+#         print(f"Post ID: {result.get('linkedin_post_id')}")
+
+#     else:
+#         message = result.get("message", "")
+
+#         try:
+#             error_data = json.loads(message)
+#             print(f"\n❌ Error: {error_data.get('message')}")
+#         except Exception:
+#             print(f"\n❌ Error: {message}")
+
+
+# if __name__ == "__main__":
+#     main()

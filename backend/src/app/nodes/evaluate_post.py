@@ -1,6 +1,6 @@
-from src.app.prompts.evaluate_prompt import evaluate_prompt
-from src.app.schemas.state import LinkedInState
-from src.app.services import get_llm
+from app.prompts.evaluate_prompt import evaluate_prompt
+from app.schemas.state import LinkedInState
+from app.services import get_llm
 import json
 
 def evaluate_linkedin_post(state:LinkedInState)-> LinkedInState:
