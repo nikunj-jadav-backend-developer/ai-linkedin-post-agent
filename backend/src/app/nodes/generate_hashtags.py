@@ -1,6 +1,6 @@
-from src.app.prompts.generate_hashtags_prompt import generate_hashtags_prompt
-from src.app.schemas.state import LinkedInState
-from src.app.services import get_llm
+from app.prompts.generate_hashtags_prompt import generate_hashtags_prompt
+from app.schemas.state import LinkedInState
+from app.services import get_llm
 import json
 
 def generate_hashtags(state: LinkedInState) -> LinkedInState:
