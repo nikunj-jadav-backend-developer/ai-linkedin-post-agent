@@ -1,0 +1,44 @@
+groups:
+  - name: ai-linkedin-post-agent
+
+    rules:
+
+      # FastAPI application down
+      - alert: FastAPIServiceDown
+        expr: up{job="ai-linkedin-post-agent"} == 0
+        for: 1m
+
+        labels:
+          severity: critical
+
+        annotations:
+          summary: "FastAPI service is down"
+          description: "Prometheus cannot reach the FastAPI application."
+
+      # High AI errors
+      - alert: HighAIErrorRate
+        expr: ai_errors_total > 5
+        for: 2m
+
+        labels:
+          severity: warning
+
+        annotations:
+          summary: "High AI error rate"
+          description: "AI workflow errors exceeded threshold."
+
+      # High API latency
+      - alert: HighAPILatency
+        expr: (
+                rate(http_request_duration_seconds_sum[5m])
+                /
+                rate(http_request_duration_seconds_count[5m])
+              ) > 2
+        for: 5m
+
+        labels:
+          severity: warning
+
+        annotations:
+          summary: "High API latency"
+          description: "Average API response time is greater than 2 seconds."
