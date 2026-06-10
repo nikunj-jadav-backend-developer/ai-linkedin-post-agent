@@ -13,7 +13,7 @@ REQUEST_LATENCY = Histogram(
 )
 
 POST_GENERATED = Counter(
-    "linkedin_posts_generated_total",
+    "linkedin_posts_generated_total",   
     "Total AI generated posts"
 )
 
