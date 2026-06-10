@@ -1,6 +1,6 @@
-from app.prompts.linkedin_hooks_prompt import linkedin_hooks_prompt
-from app.schemas.state import LinkedInState
-from app.services import get_llm
+from src.app.prompts.linkedin_hooks_prompt import linkedin_hooks_prompt
+from src.app.schemas.state import LinkedInState
+from src.app.services import get_llm
 import json
 
 def generate_linkedin_hooks(state:LinkedInState)-> LinkedInState:
