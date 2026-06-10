@@ -1,6 +1,6 @@
 import uuid
 from fastapi import APIRouter, HTTPException
-from app.nodes import (
+from src.app.nodes import (
     evaluate_linkedin_post,
     post_linkedin_after_approve,
     find_best_linkedin_hook,
@@ -9,7 +9,7 @@ from app.nodes import (
     generate_hashtags,
 )
 
-from app.schemas.schema import (
+from src.app.schemas.schema import (
     HookInput,
     HookScore,
     PostResponseSchema,
